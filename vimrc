@@ -26,7 +26,7 @@ if WINDOWS()
     if has('multi_byte')
         set termencoding=cp850
         setglobal fileencoding=utf-8
-        set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
+        set fileencodings=ucs-bom,utf-8,utf-16le,cp936,cp1252,iso-8859-15
     endif
 
 elseif OSX()
@@ -56,6 +56,7 @@ if filereadable(expand(vimrc_plugins_path))
     exec 'source ' . fnameescape(vimrc_plugins_path)
 endif
 call vundle#end()         " required
+let g:snipMate = { 'snippet_version' : 1 }
 
 " vundle#end
 filetype plugin indent on " required
@@ -149,9 +150,10 @@ if has('autocmd')
                     \ if line("'\"") > 0 && line("'\"") <= line("$") |
                     \   exe "normal g`\"" |
                     \ endif
-        autocmd FileType text setlocal textwidth=80 " for all text files set 'textwidth' to 80 characters.
+        "autocmd FileType text setlocal textwidth=80 " for all text files set 'textwidth' to 80 characters.
+        autocmd FileType text setlocal renderoptions=type:directx,renmode:5 " for all text files
         autocmd FileType c,cpp,java,javascript,go set comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,f://
-        autocmd FileType javascript,html,htmldjango,xhtml,haml,css,vue,js setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+        autocmd FileType javascript,html,htmldjango,xhtml,haml,css,vue,js,py setlocal tabstop=2 cindent shiftwidth=2 softtabstop=2 expandtab
         autocmd FileType vim set comments=sO:\"\ -,mO:\"\ \ ,eO:\"\",f:\"
     augroup END
 endif
